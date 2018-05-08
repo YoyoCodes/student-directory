@@ -29,21 +29,20 @@ def input_students
 end
 	
 def print_header
-  puts "The students of Villains Academy"
-  puts "-------------"
+  puts "The students of Villains Academy".center(50,"  ***  ")
+  puts "-------------".center(50,"  ***  ")
 end
 
 def print(students)
   student_index = 0
   while student_index < students.length do
-    puts "#{student_index+1}.#{students[student_index][:name]} - #{students[student_index][:cohort]} cohort"
-
+    puts "#{student_index+1}.#{students[student_index][:name]} - #{students[student_index][:cohort]} cohort".center(50,"      ")
     student_index += 1
   end
 end
 
 def print_footer(names)
-  puts "Overall, we have #{names.count} great students"
+  puts "Overall, we have #{names.count} great students".center(50,"  ***  ")
 end
 
 def input_first_letter
