@@ -24,8 +24,11 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, index|
-    puts "#{index+1}.#{student[:name]} (#{student[:cohort]} cohort)"
+  student_index = 0
+  while student_index < students.length do
+    puts "#{student_index+1}.#{students[student_index][:name]} - #{students[student_index][:cohort]} cohort"
+
+    student_index += 1
   end
 end
 
@@ -34,13 +37,24 @@ def print_footer(names)
 end
 
 def input_first_letter
+  puts ""
   puts "Insert a letter to select the students whose name begins with that specific letter: "
   letter = gets.chomp.upcase
 end
 
 def print_with_letter(students, letter)
   students.each_with_index do |student, index|
-    if student[:name][0][0][0] == letter
+    if student[:name][0] == letter
+    puts "#{index+1}.#{student[:name]} (#{student[:cohort]} cohort)"
+    end 
+  end
+end
+
+def print_less_than_twelve_char_names(students)
+  puts""
+  puts "The students whose name is shorter than 12 characters are: "
+  students.each_with_index do |student, index|
+    if student[:name].length < 12
     puts "#{index+1}.#{student[:name]} (#{student[:cohort]} cohort)"
     end 
   end
@@ -52,7 +66,7 @@ students = input_students
 print_header
 print(students)
 print_footer(students)
-puts=""
 letter = input_first_letter
 print_with_letter(students, letter)
+print_less_than_twelve_char_names(students)
 	
