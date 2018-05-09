@@ -22,7 +22,11 @@ def input_students
   while !name.empty? && !hobby.empty? && !height.empty? && !cohort.empty? do
     # add the student hash to the array
     students << {name: name, hobby: hobby, height: height, cohort: cohort.to_sym}
-    puts "Now we have #{students.count} students"
+    if students.count == 1
+      puts "Now we have 1 student".center(50,"  ***  ")
+    else
+      puts "Now we have #{students.count} students"
+    end
     # get another name from the user
     puts "Name: "
     name = gets.chomp.capitalize
@@ -47,16 +51,21 @@ def print_header
 end
 
 def print(students)
-  string = ''
+  
   students.group_by{|student| student[:cohort]}.map do |month, students|
-    string += "\n#{month}: "
-    students.map{|student| string += "#{student[:name]}, "}
+    string = ''
+    puts "#{month}".center(50,"--")
+    students.map{|student| puts "#{student[:name]}".center(50,"       ")}
   end
-  puts string
+  
 end
 
 def print_footer(names)
+  if names.count == 1
+    puts "Now we have 1 student".center(50,"  ***  ")
+  else 
   puts "Overall, we have #{names.count} great students".center(50,"  ***  ")
+  end
 end
 
 def input_first_letter
