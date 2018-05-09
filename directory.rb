@@ -1,28 +1,44 @@
 #let's put all students into an array
 def input_students
-  puts "Please enter the name, hobby and height(cm) for each student"
+  puts "Please enter the name, cohort(month), hobby and height(cm) for each student"
   puts "To finish, just hit return twice"
+  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] 
   # create an empty array
   students = []
   # get the first name
   puts "Name: "
   name = gets.chomp.capitalize
-  puts "Hobby: "
-  hobby = gets.chomp
-  puts "Height: "
-  height = gets.chomp
-  # while the name is not empty, repeat this code
-  while !name.empty? && !hobby.empty? && !height.empty? do
-    # add the student hash to the array
-    students << {name: name, hobby: hobby, height: height, cohort: :november}
-    puts "Now we have #{students.count} students"
-    # get another name from the user
-    puts "Name: "
-    name = gets.chomp.capitalize
+  puts "Cohort: "
+  cohort = gets.chomp.capitalize
+  if months.include?(cohort)
     puts "Hobby: "
     hobby = gets.chomp
     puts "Height: "
     height = gets.chomp
+  else
+    puts "Please introduce a valid cohort: "
+    cohort = gets.chomp.capitalize
+  end
+  # while the name is not empty, repeat this code
+  while !name.empty? && !hobby.empty? && !height.empty? && !cohort.empty? do
+    # add the student hash to the array
+    students << {name: name, hobby: hobby, height: height, cohort: cohort}
+    puts "Now we have #{students.count} students"
+    # get another name from the user
+    puts "Name: "
+    name = gets.chomp.capitalize
+    puts "Cohort: "
+    cohort = gets.chomp.capitalize
+    puts "Hobby: "
+    if months.include?(cohort)
+      puts "Hobby: "
+      hobby = gets.chomp
+      puts "Height: "
+      height = gets.chomp
+    else
+      puts "Please introduce a valid cohort: "
+      cohort = gets.chomp.capitalize
+    end
   end
   # return the array of students
   students
