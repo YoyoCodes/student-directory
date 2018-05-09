@@ -10,35 +10,32 @@ def input_students
   name = gets.chomp.capitalize
   puts "Cohort: "
   cohort = gets.chomp.capitalize
-  if months.include?(cohort)
-    puts "Hobby: "
-    hobby = gets.chomp
-    puts "Height: "
-    height = gets.chomp
-  else
+  while !months.include?(cohort) && !name.empty?
     puts "Please introduce a valid cohort: "
     cohort = gets.chomp.capitalize
   end
+  puts "Hobby: "
+  hobby = gets.chomp
+  puts "Height: "
+  height = gets.chomp
   # while the name is not empty, repeat this code
   while !name.empty? && !hobby.empty? && !height.empty? && !cohort.empty? do
     # add the student hash to the array
-    students << {name: name, hobby: hobby, height: height, cohort: cohort}
+    students << {name: name, hobby: hobby, height: height, cohort: cohort.to_sym}
     puts "Now we have #{students.count} students"
     # get another name from the user
     puts "Name: "
     name = gets.chomp.capitalize
     puts "Cohort: "
     cohort = gets.chomp.capitalize
-    puts "Hobby: "
-    if months.include?(cohort)
-      puts "Hobby: "
-      hobby = gets.chomp
-      puts "Height: "
-      height = gets.chomp
-    else
+    while !months.include?(cohort) && !name.empty?
       puts "Please introduce a valid cohort: "
       cohort = gets.chomp.capitalize
     end
+    puts "Hobby: "
+    hobby = gets.chomp
+    puts "Height: "
+    height = gets.chomp
   end
   # return the array of students
   students
@@ -50,11 +47,12 @@ def print_header
 end
 
 def print(students)
-  student_index = 0
-  while student_index < students.length do
-    puts "#{student_index+1}.#{students[student_index][:name]} - #{students[student_index][:cohort]} cohort".center(50,"      ")
-    student_index += 1
+  string = ''
+  students.group_by{|student| student[:cohort]}.map do |month, students|
+    string += "\n#{month}: "
+    students.map{|student| string += "#{student[:name]}, "}
   end
+  puts string
 end
 
 def print_footer(names)
