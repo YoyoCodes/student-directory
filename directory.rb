@@ -51,12 +51,13 @@ def print_header
 end
 
 def print(students)
-  
+  if students.count > 0
   students.group_by{|student| student[:cohort]}.map do |month, students|
     string = ''
     puts "#{month}".center(50,"--")
     students.map{|student| puts "#{student[:name]}".center(50,"       ")}
   end
+end
   
 end
 
