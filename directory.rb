@@ -7,17 +7,17 @@ def input_students
   students = []
   # get the first name
   puts "Name: "
-  name = gets.chomp.capitalize
+  name =  STDIN.gets.delete("\n").capitalize
   puts "Cohort: "
-  cohort = gets.chomp.capitalize
+  cohort =  STDIN.gets.delete("\n").capitalize
   while !months.include?(cohort) && !name.empty?
     puts "Please introduce a valid cohort: "
-    cohort = gets.chomp.capitalize
+    cohort =  STDIN.gets.delete("\n").capitalize
   end
   puts "Hobby: "
-  hobby = gets.chomp
+  hobby =  STDIN.gets.delete("\n")
   puts "Height: "
-  height = gets.chomp
+  height =  STDIN.gets.delete("\n")
   # while the name is not empty, repeat this code
   while !name.empty? && !hobby.empty? && !height.empty? && !cohort.empty? do
     # add the student hash to the array
@@ -29,17 +29,17 @@ def input_students
     end
     # get another name from the user
     puts "Name: "
-    name = gets.chomp.capitalize
+    name =  STDIN.gets.delete("\n").capitalize
     puts "Cohort: "
-    cohort = gets.chomp.capitalize
+    cohort =  STDIN.gets.delete("\n").capitalize
     while !months.include?(cohort) && !name.empty?
       puts "Please introduce a valid cohort: "
-      cohort = gets.chomp.capitalize
+      cohort =  STDIN.gets.delete("\n").capitalize
     end
     puts "Hobby: "
-    hobby = gets.chomp
+    hobby =  STDIN.gets.delete("\n")
     puts "Height: "
-    height = gets.chomp
+    height =  STDIN.gets.delete("\n")
   end
   # return the array of students
   students
