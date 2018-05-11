@@ -34,7 +34,8 @@ end
 
 #let's put all students into an array
 def input_students
-  puts "Please enter the name, cohort (month), hobby and height (in cm) for each student"
+  #This message will be considered feedback when the user chose option 1 from the menu
+  puts "Please enter the name, cohort (month), hobby and height (in cm) for each student" 
   puts "To finish, just hit return twice"
   # user must provide a valid cohort name included in the 'months' array
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] 
@@ -106,6 +107,7 @@ def show_students
 end
 	
 def print_header
+  #This message will be considered feedback when the user chose option 2 from the menu
   puts"" 
   puts "The students of Villains Academy".center(50)
   puts "-------------".center(50)
@@ -138,6 +140,8 @@ def save_students
     file.puts csv_line
   end
   file.close
+  #This message will be considered feedback when the user chose option 3 from the menu
+  puts "Student list was saved/updated successfully!" 
 end
 
 def load_students(filename = "students.csv")
@@ -156,6 +160,7 @@ def try_load_students
   end
   if File.exists?(filename) # if it exists
     load_students(filename)
+    #This message will be considered feedback when the user chose option 4 from the menu
     puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
