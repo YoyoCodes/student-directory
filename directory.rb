@@ -32,6 +32,10 @@ def process(selection)
   end
 end
 
+def students_access(name, cohort, hobby, height)
+  @students << {name: name, cohort: cohort.to_sym, hobby: hobby, height: height}
+end
+
 #let's put all students into an array
 def input_students
   puts "Please enter the name, cohort (month), hobby and height (in cm) for each student"
@@ -62,7 +66,7 @@ def input_students
     end 
       
     # add the student hash to the array
-    @students << {name: name, hobby: hobby, height: height, cohort: cohort.to_sym}
+    students_access(name, cohort, hobby, height)
     if @students.count == 1
       puts "Now we have 1 student"
     else
@@ -133,7 +137,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
     name, cohort, hobby, height = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym, hobby: hobby, height: height}
+    students_access(name, cohort, hobby, height)
   end
   file.close
 end
