@@ -135,26 +135,27 @@ def print_footer
 end
 
 def save_students(filename)
-  # open the file for writing
-  file = File.open(filename, "w")
+  # executes block using file as an argument;file is closed automatically when the block exits 
+  file = File.open(filename, "w"){|file|
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort], student[:hobby], student[:height]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
-  file.close
+  }
   #This message will be considered feedback when the user chose option 3 from the menu
   puts "Student list was saved/updated successfully!" 
 end
 
 def load_students(filename)
-  file = File.open(filename, "r")
+  # executes block using file as an argument;file is closed automatically when the block exits
+  file = File.open(filename, "r"){|file|
   file.readlines.each do |line|
     name, cohort, hobby, height = line.chomp.split(',')
     access_list_of_students(name, cohort, hobby, height)
   end
-  file.close
+  }
 end
 
 def try_load_students
