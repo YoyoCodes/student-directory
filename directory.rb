@@ -1,3 +1,4 @@
+require 'csv'
 @students = [] # an empty array accessible to all methods
 
 def print_menu
@@ -135,27 +136,35 @@ def print_footer
 end
 
 def save_students(filename)
-  # executes block using file as an argument;file is closed automatically when the block exits 
-  file = File.open(filename, "w"){|file|
-  # iterate over the array of students
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort], student[:hobby], student[:height]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-  end
-  }
+#  # executes block using file as an argument;file is closed automatically when the block exits 
+#  file = File.open(filename, "w"){|file|
+#  # iterate over the array of students
+#  @students.each do |student|
+#    student_data = [student[:name], student[:cohort], student[:hobby], student[:height]]
+#    csv_line = student_data.join(",")
+#    file.puts csv_line
+#  end
+#  }
   #This message will be considered feedback when the user chose option 3 from the menu
+  CSV.open(filename, "w") do |csv|
+    @students.each do |student|
+      csv << [student[:name], student[:cohort], student[:hobby], student[:height]]
+    end
+  end
   puts "Student list was saved/updated successfully!" 
 end
 
 def load_students(filename)
   # executes block using file as an argument;file is closed automatically when the block exits
-  file = File.open(filename, "r"){|file|
-  file.readlines.each do |line|
-    name, cohort, hobby, height = line.chomp.split(',')
-    access_list_of_students(name, cohort, hobby, height)
+#  file = File.open(filename, "r"){|file|
+#  file.readlines.each do |line|
+#    name, cohort, hobby, height = line.chomp.split(',')
+#    access_list_of_students(name, cohort, hobby, height)
+#  end
+#  }
+  CSV.foreach(filename) do |value|
+    access_list_of_students(value[0], value[1], value[2], value[3])
   end
-  }
 end
 
 def try_load_students
